@@ -92,7 +92,10 @@ class Cart extends Component {
 
               <div className="counterCheck">
                 <Counter />
-                <img className="checkoutImage" src={product.image} alt="" />
+                <div className="checkoutImage1">
+                <img className="cartimg" src={product.image} alt="" />
+
+                </div>
               </div>
             </div>
           );

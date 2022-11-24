@@ -64,9 +64,10 @@ class PDP extends Component {
   render() {
     return (
       <div className="pdp">
+        <div className="prodInfo">
         <div className="preview">
           {this.props.productDetails.gallery?.map((image, index) => (
-            <div>
+            <div className="">
               <img
                 key={index}
                 className="previewImage"
@@ -76,15 +77,19 @@ class PDP extends Component {
             </div>
           ))}
         </div>
-        <div className="prodInfo">
-          <div className="details">
-            <div className="details-image-div">
+
+        <div className="details-image-div">
               <img
                 src={this.props.productDetails.gallery?.[0]}
                 alt="Full Image"
                 className="details-image"
               />
             </div>
+        </div>
+       
+        <div className="">
+          <div className="details">
+            
             <div className="prodDetails">
               <div className="productTitle">
                 {this.props.productDetails.name}

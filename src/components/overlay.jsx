@@ -29,6 +29,11 @@ class Overlay extends Component {
     this.setState({ count: this.state.count - 1 });
   };
 
+  // formatCount() {
+  //   const { count } = this.state;
+  //   return count === 0 ? 0 : count;
+  // }
+
   render() {
     return (
       <div className="cart2">
@@ -100,17 +105,18 @@ class Overlay extends Component {
                   {/* Counter */}
                   <div className="counterCheck2">
                     <div className="counter2">
-                      <button onClick={this.addItem} className="addItem2">
+                      <Counter />
+                      {/* <button onClick={this.addItem} className="addItem2">
                         +
                       </button>
-                      <div className="itemNumber2">{this.formatCount()}</div>
+                      <div className="itemNumber2">{ this.state.count }</div>
                       <button
                         onClick={this.removeItem}
                         className="removeItem2"
                         //   disabled={this.state.count === 0}
                       >
                         -
-                      </button>
+                      </button> */}
                     </div>
 
                     <div className="checkoutImage2">
@@ -142,10 +148,7 @@ class Overlay extends Component {
       </div>
     );
   }
-  formatCount() {
-    const { count } = this.state;
-    return count === 0 ? 0 : count;
-  }
+ 
 }
 
 function mapStateToProps(state) {
