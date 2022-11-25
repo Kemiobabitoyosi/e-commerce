@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Counter from "./counter.jsx";
+import Counters from "./counters.jsx";
 import OverlayImage from "../images/OverlayImage.svg";
 import Category from "./category.jsx";
 import allActions from "../Actions";
@@ -8,12 +8,7 @@ import { Link } from "react-router-dom";
 
 class Overlay extends Component {
   state = {
-    productTitle: "Apollo",
-    productDecription: "Running Short",
     productPrice: 50,
-    productImage: OverlayImage,
-    sizeDescription: ["XS", "S", "M", "L"],
-    colorDescription: ["", "", ""],
     total: 200,
     count: 0,
   };
@@ -29,16 +24,11 @@ class Overlay extends Component {
     this.setState({ count: this.state.count - 1 });
   };
 
-  // formatCount() {
-  //   const { count } = this.state;
-  //   return count === 0 ? 0 : count;
-  // }
-
   render() {
     return (
       <div className="cart2">
         {/* Header */}
-        <h1 className="bagItems">My Bag, 3 Items</h1>
+        <h1 className="bagItems">My Bag, <span className="bagItemTotal" >{this.props.products.length}</span> Items</h1>
 
         {/* Checkout Info */}
         <div className="checkoutDetails2">
@@ -105,18 +95,11 @@ class Overlay extends Component {
                   {/* Counter */}
                   <div className="counterCheck2">
                     <div className="counter2">
-                      <Counter />
-                      {/* <button onClick={this.addItem} className="addItem2">
-                        +
-                      </button>
-                      <div className="itemNumber2">{ this.state.count }</div>
-                      <button
-                        onClick={this.removeItem}
-                        className="removeItem2"
-                        //   disabled={this.state.count === 0}
-                      >
-                        -
-                      </button> */}
+                      <Counters />
+                      {/* {{
+                        backgroundColor:
+                          this.handleShowCart === true ? "red" : "",
+                      }} */}
                     </div>
 
                     <div className="checkoutImage2">
@@ -148,7 +131,6 @@ class Overlay extends Component {
       </div>
     );
   }
- 
 }
 
 function mapStateToProps(state) {

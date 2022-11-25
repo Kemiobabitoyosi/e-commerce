@@ -74,7 +74,14 @@ class Home extends Component {
         <Navbar setCurrency={this.handleSetCurrency} />
         {this.state.categories?.map((category, index) => (
           <div key={index}>
-            <Category item={category} currency={this.state.currency} />
+            <Category item={category} currency={this.state.currency} 
+            style={{
+              backgroundColor:
+              this.handleShowCart === this.handleShowCart
+                  ? "red;"
+                  : "",
+            }}
+            />
           </div>
         ))}
       </div>

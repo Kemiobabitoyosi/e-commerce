@@ -54,6 +54,7 @@ class PDP extends Component {
   handleAddToCart = (event) => {
     event.preventDefault();
     const productDetails = {
+      brand: this.props.productDetails.brand,
       name: this.props.productDetails.name,
       image: this.props.productDetails.gallery[0],
       attributes: [...this.state.product],
@@ -65,41 +66,40 @@ class PDP extends Component {
     return (
       <div className="pdp">
         <div className="prodInfo">
-        <div className="preview">
-          {this.props.productDetails.gallery?.map((image, index) => (
-            <div className="">
-              <img
-                key={index}
-                className="previewImage"
-                src={image}
-                alt="Preview Image"
-              />
-            </div>
-          ))}
+          <div className="preview">
+            {this.props.productDetails.gallery?.map((image, index) => (
+              <div className="">
+                <img
+                  key={index}
+                  className="previewImage"
+                  src={image}
+                  alt="Preview Image"
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="details-image-div">
+            <img
+              src={this.props.productDetails.gallery?.[0]}
+              alt="Full Image"
+              className="details-image"
+            />
+          </div>
         </div>
 
-        <div className="details-image-div">
-              <img
-                src={this.props.productDetails.gallery?.[0]}
-                alt="Full Image"
-                className="details-image"
-              />
-            </div>
-        </div>
-       
         <div className="">
           <div className="details">
-            
             <div className="prodDetails">
               <div className="productTitle">
                 {this.props.productDetails.name}
               </div>
               <div
-                className="productDescription"
-                dangerouslySetInnerHTML={{
-                  __html: this.props.productDetails.description,
-                }}
-              ></div>
+                className="productDescription1"
+                // dangerouslySetInnerHTML={{
+                //   __html: this.props.productDetails.brand,
+                // }}
+              >{this.props.productDetails.brand}</div>
 
               {this.props.productDetails.attributes?.map((attribute, index) => {
                 if (attribute.name === "Color") {
@@ -157,15 +157,12 @@ class PDP extends Component {
               >
                 ADD TO CART
               </button>
-              <p>
-                Find stunning women's cocktail dresses
-                <br />
-                and party dresses. Stand out in lace
-                <br />
-                and metallic cocktail dresses and party
-                <br />
-                dresses from all your favorite brands.
-              </p>
+              <div
+                className="productDescription"
+                dangerouslySetInnerHTML={{
+                  __html: this.props.productDetails.description,
+                }}
+              ></div>
             </div>
           </div>
         </div>
