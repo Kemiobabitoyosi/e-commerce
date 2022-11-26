@@ -68,6 +68,8 @@ class Home extends Component {
       currency: currency,
     });
   };
+
+
   render() {
     return (
       <div className="categoryItem">
@@ -75,12 +77,12 @@ class Home extends Component {
         {this.state.categories?.map((category, index) => (
           <div key={index}>
             <Category item={category} currency={this.state.currency} 
-            style={{
-              backgroundColor:
-              this.handleShowCart === this.handleShowCart
-                  ? "red;"
-                  : "",
-            }}
+            // style={{
+            //   backgroundColor:
+            //   this.handleShowCart === this.handleShowCart
+            //       ? "red;"
+            //       : "",
+            // }}
             />
           </div>
         ))}

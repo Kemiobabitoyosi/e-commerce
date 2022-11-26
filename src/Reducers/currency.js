@@ -1,5 +1,6 @@
 const initialState = {
   currency: "USD",
+  symbol: "$"
 };
 
 const currency = (state = initialState, action) => {
@@ -7,7 +8,9 @@ const currency = (state = initialState, action) => {
     case "CHANGE_CURRENCY":
       const newCurrency = action.payload;
       return {
-        currency: newCurrency,
+        ...state,
+        currency: newCurrency.label,
+        symbol: newCurrency.symbol,
       };
     default:
       return state;

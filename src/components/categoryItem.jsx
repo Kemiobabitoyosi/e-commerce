@@ -8,21 +8,29 @@ import { Link } from "react-router-dom";
 
 class CategoryItem extends Component {
   state = {
-    productName: "Appollo Running Short",
-    productPrice: 50,
-    productImage: ProductC,
+    productPrice: {},
   };
-  productPrice() {
+  componentDidMount() {
+    this.productPrice()
+  }
+  productPrice = () => {
     const cur = this.props.product.prices.find(
       (price) => price.currency.label === this.props.currency
     );
-    return (
-      <div className="productPrice">
-        {cur.currency.symbol}
-        {cur.amount}
-      </div>
-    );
+    this.setState({
+      productPrice: {
+        symbol: cur.currency.symbol,
+        amount: cur.amount
+      }
+    })
+    // return (
+    //   <div className="productPrice">
+    //     {cur.currency.symbol}
+    //     {cur.amount}
+    //   </div>
+    // );
   }
+
   render() {
     return (
       <Link to={`product/${this.props.product.id}`}>
@@ -43,7 +51,16 @@ class CategoryItem extends Component {
               <div className="out-of-stock">OUT OF STOCK</div>
             )}
             <div className="productName">{this.props.product.name}</div>
-            <div>{this.productPrice()}</div>
+            <div>{this.productPrice.symbol} {this.productPrice.amount}</div>
+            <div>
+              {this.props.product.prices.map((price, index) => {
+                if (price.currency.label === this.props.currency) {
+                  return (
+                    <div key={index}>{price.currency.symbol} {price.amount}</div>
+                  )
+                }
+              })}
+            </div>
           </div>
         </div>
       </Link>

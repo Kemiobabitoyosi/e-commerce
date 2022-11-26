@@ -150,16 +150,16 @@ class Cart extends Component {
 
         <div className="checkoutTotal">
           <div className="tax">
-            Tax 21%: <span className="value">${this.props.cart?.tax?.toFixed(2)}</span>
+            Tax 21%: <span className="value">{ this.props.currency.symbol } {this.props.cart?.tax?.toFixed(2)}</span>
           </div>
           <div className="quantity">
-            Quantity: <span className="value">{this.props.products?.length}</span>
+            Quantity: <span className="value">{ this.props.currency.symbol } {this.props.products?.length}</span>
           </div>
           <div className="total">
-            Total: <span className="value">${this.props.cart?.cartTotal?.toFixed(2)}</span>
+            Total: <span className="value">{ this.props.currency.symbol } {this.props.cart?.cartTotal?.toFixed(2)}</span>
           </div>
           <div className="total">
-            Total(Inclusive Tax): <span className="value">${this.props.cart?.overallTotal?.toFixed(2)}</span>
+            Total(Inclusive Tax): <span className="value">{ this.props.currency.symbol } {this.props.cart?.overallTotal?.toFixed(2)}</span>
           </div>
           <button className="checkoutButton">ORDER</button>
         </div>
