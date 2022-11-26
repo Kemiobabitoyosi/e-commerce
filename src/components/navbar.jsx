@@ -17,7 +17,6 @@ class Navbar extends Component {
   render() {
     return (
       <div className="navbar">
-       
         {/* People */}
         <div className="people">
              <Link to="/#all"><span className="women">ALL</span></Link>
@@ -27,7 +26,7 @@ class Navbar extends Component {
 
         {/* NavLogo */}
         <img className="navLogo" src={Navlogo} alt="Shopping bag" />
-        
+
         {/* Cart Details */}
         <div className="checkout">
           <select className="dropDown">
@@ -41,16 +40,20 @@ class Navbar extends Component {
               ¥
             </option>
           </select>
-          <div className="cart-container">
-            <div>
+          <div className="cart-container" onClick={this.handleShowCart}>
+            <div
+              className="modal"
+              
+            >
               <img
                 className="cartIcon"
                 src={Cart}
                 alt="Cart"
-                onClick={this.handleShowCart}
               />
             </div>
-            <span className="prodLength">{this.props.cart.products.length}</span>
+            <span className="prodLength">
+              {this.props.cart.products.length}
+            </span>
             {this.state.showCart ? <Overlay /> : ""}
           </div>
         </div>

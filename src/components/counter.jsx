@@ -11,7 +11,6 @@ class Counter extends Component {
         <button
           onClick={(e) => this.props.removeFromCartHandler(e, this.props.product)} 
           className="removeItem"
-          //   disabled={this.state.count === 0}
         >
           -
         </button>

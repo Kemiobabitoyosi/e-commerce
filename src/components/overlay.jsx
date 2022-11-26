@@ -13,20 +13,20 @@ class Overlay extends Component {
 
   handleAddToCart = (event, product) => {
     event.preventDefault();
-     this.props.increaseProductQuantity(product);  
+     this.props.increaseProductQuantity(product);
   };
 
   handleRemoveFromCart = (event, product) => {
-    event.preventDefault();   
+    event.preventDefault();
      this.props.decreaseProductQuantity(product);
-    
+
   };
 
   render() {
     return (
       <div className="cart2">
         {/* Header */}
-        <h1 className="bagItems">My Bag, 3 Items</h1>
+        <h1 className="bagItems">My Bag, <span className="bagItemTotal" >{this.props.products.length}</span> Items</h1>
 
         {/* Checkout Info */}
         <div className="checkoutDetails2">
@@ -41,11 +41,11 @@ class Overlay extends Component {
                       if (price.currency.label === this.props.currency.currency) {
                         return (
                           <div className="checkoutPrice" key={index}>
-                            {price.currency.symbol} {price.amount.toFixed(2)}                  
+                            {price.currency.symbol} {price.amount.toFixed(2)}
                           </div>
                         )
-                      }  
-                    })} 
+                      }
+                    })}
 
                     {product.attributes?.map((attribute, index) => {
                       if (attribute.name === "Color") {
@@ -145,7 +145,6 @@ class Overlay extends Component {
       </div>
     );
   }
- 
 }
 
 function mapStateToProps(state) {

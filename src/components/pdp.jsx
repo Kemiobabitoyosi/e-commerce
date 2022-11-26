@@ -58,6 +58,7 @@ class PDP extends Component {
     const attr = this.state.product?.concat(this.props.productDetails?.attributes?.filter(attr => this.state.product?.every(selectedAttr => selectedAttr.name != attr.name)));
     const productDetails = {
       id: this.props.productDetails.id,
+      brand: this.props.productDetails.brand,
       name: this.props.productDetails.name,
       image: this.props.productDetails?.gallery[0],
       attributes: attr,
@@ -111,7 +112,7 @@ class PDP extends Component {
               <div className="out-of-stock">OUT OF STOCK</div>
             )}
         </div>
-       
+
         <div className="">
           <div className="details">
             
@@ -186,15 +187,12 @@ class PDP extends Component {
               >
                 ADD TO CART
               </button>
-              <p>
-                Find stunning women's cocktail dresses
-                <br />
-                and party dresses. Stand out in lace
-                <br />
-                and metallic cocktail dresses and party
-                <br />
-                dresses from all your favorite brands.
-              </p>
+              <div
+                className="productDescription"
+                dangerouslySetInnerHTML={{
+                  __html: this.props.productDetails.description,
+                }}
+              ></div>
             </div>
           </div>
         </div>
