@@ -34,11 +34,9 @@ class CategoryItem extends Component {
               alt=""
               style={{
                 opacity:
-                this.props.product.inStock === !this.props.product.insStock ? "" : "0.5",
+                this.props.product.inStock ? "" : "0.5",
               }}
             />
-            {/* {this.props.product.inStock} === !{this.props.product.insStock} (
-            <div className="noStock">{this.props.product.gallery}</div>) */}
             {this.props.product.inStock ? (
               ""
             ) : (

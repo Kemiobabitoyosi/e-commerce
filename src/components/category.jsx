@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-// import ProductA from "../images/ProductA.svg";
-// import ProductB from "../images/ProductA.svg";
-// import ProductC from "../images/ProductA.svg";
-// import ProductD from "../images/ProductA.svg";
 import CategoryItem from "./categoryItem";
 
 class Category extends Component {

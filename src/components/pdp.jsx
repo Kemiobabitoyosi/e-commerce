@@ -7,6 +7,7 @@ import allActions from "../Actions";
 class PDP extends Component {
   state = {
     product: [],
+    selectedAttribute: {}
   };
 
   handlePrice() {
@@ -26,6 +27,7 @@ class PDP extends Component {
 
   handleSelectAttribute = (event, attribute, item) => {
     event.preventDefault();
+    this.isAttributeSelected(attribute, item)
     const oldProduct = this.state.product;
     const newProduct = {};
     newProduct["name"] = attribute.name;
@@ -53,13 +55,27 @@ class PDP extends Component {
 
   handleAddToCart = (event) => {
     event.preventDefault();
+    const attr = this.state.product?.concat(this.props.productDetails?.attributes?.filter(attr => this.state.product?.every(selectedAttr => selectedAttr.name != attr.name)));
     const productDetails = {
+      id: this.props.productDetails.id,
       name: this.props.productDetails.name,
-      image: this.props.productDetails.gallery[0],
-      attributes: [...this.state.product],
+      image: this.props.productDetails?.gallery[0],
+      attributes: attr,
+      quantity: 1,
+      prices: this.props.productDetails.prices,
+      currency: this.props.currency.currency
     };
     this.props.addToCartAction(productDetails);
   };
+
+  isAttributeSelected = (attribute, item) => {
+    const oldSelectedAttribute = this.state.selectedAttribute;
+
+    oldSelectedAttribute[attribute.id] =  item.id;
+    this.setState({
+      selectedAttribute: oldSelectedAttribute
+    });
+  }
 
   render() {
     return (
@@ -67,7 +83,7 @@ class PDP extends Component {
         <div className="prodInfo">
         <div className="preview">
           {this.props.productDetails.gallery?.map((image, index) => (
-            <div className="">
+            <div className="" key={index}>
               <img
                 key={index}
                 className="previewImage"
@@ -83,8 +99,17 @@ class PDP extends Component {
                 src={this.props.productDetails.gallery?.[0]}
                 alt="Full Image"
                 className="details-image"
+                style={{
+                  opacity:
+                  this.props.productDetails.inStock ? "" : "0.5"
+                }}
               />
             </div>
+            {this.props.productDetails.inStock ? (
+              ""
+            ) : (
+              <div className="out-of-stock">OUT OF STOCK</div>
+            )}
         </div>
        
         <div className="">
@@ -138,6 +163,9 @@ class PDP extends Component {
                               onClick={(e) =>
                                 this.handleSelectAttribute(e, attribute, item)
                               }
+                              style={{
+                                border: this.state.selectedAttribute[attribute.id] ===  item.id ? "1px solid red" : ""
+                              }}
                             >
                               {item.value}
                             </button>
@@ -153,6 +181,7 @@ class PDP extends Component {
 
               <button
                 className="addButton"
+                disabled={!this.props.productDetails.inStock}
                 onClick={(e) => this.handleAddToCart(e)}
               >
                 ADD TO CART
@@ -175,9 +204,11 @@ class PDP extends Component {
 }
 
 function mapStateToProps(state) {
-  const cart = state.cart;
+  const products = state.cart.products;
+  const currency = state.currency;
   return {
-    cart,
+    products,
+    currency
   };
 }
 

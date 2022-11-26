@@ -1,28 +1,15 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  state = {
-    count: 0,
-  };
-
-  addItem = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
-  removeItem = () => {
-    if (this.state.count === 0) {
-      return;
-    }
-    this.setState({ count: this.state.count - 1 });
-  };
   render() {
     return (
       <div className="counter">
-        <button onClick={this.addItem} className="addItem">
+        <button onClick={(e) => this.props.addToCartHandler(e, this.props.product)} className="addItem">
           +
         </button>
-        <div className="itemNumber">{this.formatCount()}</div>
+        <div className="itemNumber">{this.props.product?.quantity}</div>
         <button
-          onClick={this.removeItem}
+          onClick={(e) => this.props.removeFromCartHandler(e, this.props.product)} 
           className="removeItem"
           //   disabled={this.state.count === 0}
         >
@@ -32,10 +19,6 @@ class Counter extends Component {
     );
   }
 
-  formatCount() {
-    const { count } = this.state;
-    return count === 0 ? 0 : count;
-  }
 }
 
 export default Counter;

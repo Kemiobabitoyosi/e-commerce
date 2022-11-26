@@ -3,6 +3,7 @@ import Navlogo from "../images/Navlogo.svg";
 import Cart from "../images/Cart.svg";
 import { connect } from "react-redux";
 import Overlay from "./overlay";
+import { Link } from "react-router-dom";
 
 class Navbar extends Component {
   state = {
@@ -19,9 +20,9 @@ class Navbar extends Component {
        
         {/* People */}
         <div className="people">
-          <span className="women">WOMEN</span>
-          <span className="men">MEN</span>
-          <span className="children">KIDS</span>
+             <Link to="/#all"><span className="women">ALL</span></Link>
+           <Link to="/#clothes"><span className="men">CLOTHES</span></Link>
+           <Link to="/#tech"><span className="children">TECH</span></Link>
         </div>
 
         {/* NavLogo */}

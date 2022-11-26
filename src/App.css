@@ -295,7 +295,9 @@ h1 {
   color: #ffffff;
   font-weight: 600;
   font-size: 1rem;
+  cursor: pointer
 }
+
 .preview {
   display: grid;
   /* margin-left: 6.044rem; */

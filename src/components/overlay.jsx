@@ -8,31 +8,19 @@ import { Link } from "react-router-dom";
 
 class Overlay extends Component {
   state = {
-    productTitle: "Apollo",
-    productDecription: "Running Short",
-    productPrice: 50,
-    productImage: OverlayImage,
-    sizeDescription: ["XS", "S", "M", "L"],
-    colorDescription: ["", "", ""],
-    total: 200,
-    count: 0,
   };
 
-  addItem = () => {
-    this.setState({ count: this.state.count + 1 });
+
+  handleAddToCart = (event, product) => {
+    event.preventDefault();
+     this.props.increaseProductQuantity(product);  
   };
 
-  removeItem = () => {
-    if (this.state.count === 0) {
-      return;
-    }
-    this.setState({ count: this.state.count - 1 });
+  handleRemoveFromCart = (event, product) => {
+    event.preventDefault();   
+     this.props.decreaseProductQuantity(product);
+    
   };
-
-  // formatCount() {
-  //   const { count } = this.state;
-  //   return count === 0 ? 0 : count;
-  // }
 
   render() {
     return (
@@ -49,9 +37,15 @@ class Overlay extends Component {
                 <div className="cart-row" key={index}>
                   <div className="productDetail">
                     <div className="productTitle2">{product.name}</div>
-                    <div className="checkoutPrice2">
-                      ${this.state.productPrice.toFixed(2)}
-                    </div>
+                    {product.prices.map((price, index) => {
+                      if (price.currency.label === this.props.currency.currency) {
+                        return (
+                          <div className="checkoutPrice" key={index}>
+                            {price.currency.symbol} {price.amount.toFixed(2)}                  
+                          </div>
+                        )
+                      }  
+                    })} 
 
                     {product.attributes?.map((attribute, index) => {
                       if (attribute.name === "Color") {
@@ -90,6 +84,9 @@ class Overlay extends Component {
                                   <button
                                     key={index}
                                     className="sizeDescription2"
+                                    style={{
+                                      border: attribute.selected === item.id ? "1px solid red" : ""
+                                    }}
                                   >
                                     {item.value}
                                   </button>
@@ -105,7 +102,7 @@ class Overlay extends Component {
                   {/* Counter */}
                   <div className="counterCheck2">
                     <div className="counter2">
-                      <Counter />
+                      <Counter product={product} addToCartHandler={this.handleAddToCart} removeFromCartHandler={this.handleRemoveFromCart} />
                       {/* <button onClick={this.addItem} className="addItem2">
                         +
                       </button>
@@ -136,7 +133,7 @@ class Overlay extends Component {
         <div className="checkoutTotal">
           <div className="total2">
             <span className="overlayTotal">Total</span>
-            <span className="totalValue">${this.state.total.toFixed(2)}</span>
+            <span className="totalValue">${this.props.cart.overallTotal.toFixed(2)}</span>
           </div>
           <div className="buttons">
             <Link to="/cart" className="viewBag">
@@ -153,9 +150,21 @@ class Overlay extends Component {
 
 function mapStateToProps(state) {
   const products = state.cart.products;
+  const currency = state.currency;
   return {
     products,
+    cart: state.cart,
+    currency
   };
 }
 
-export default connect(mapStateToProps)(Overlay);
+function mapDispatchToProps(dispatch) {
+  return {
+    increaseProductQuantity: (product) =>
+      dispatch(allActions.cartActions.increaseProductQuantityAction(product)),
+    decreaseProductQuantity: (product) =>
+      dispatch(allActions.cartActions.decreaseProductQuantityAction(product)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Overlay);
