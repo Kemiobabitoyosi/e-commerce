@@ -12,7 +12,7 @@ class PDP extends Component {
 
   handlePrice() {
     const cur = this.props.productDetails.prices?.find(
-      (price) => price.currency.label === this.props.currency
+      (price) => price.currency.label === this.props.currency.currency
     );
     if (!cur) {
       return;

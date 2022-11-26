@@ -62,10 +62,6 @@ class ProductInfo extends Component {
     });
   };
 
-  handleAddToCart = (attribute) => {
-    console.log(1, attribute);
-  };
-
   render() {
     return (
       <div>
